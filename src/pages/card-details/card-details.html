@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar color="purplecolor">
+        <ion-title>Card Details</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="dismiss()">
+                <span color="primary" showWhen="ios">Cancel</span>
+                <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="pageContent">
+	<div class="panel">
+        <ion-card class="registerCard">
+            <ion-card-content style="padding-bottom:0px;">
+	              <ion-list>
+	                <ion-item>
+	                     <ion-label>Card No: xxxxxxxxxxxx{{cardLastForDigit}}</ion-label>
+	            	</ion-item>
+	            	<ion-item>
+	            		 <ion-label>Token: xxxxxxxxxxxx{{tokenlastFourDigit}}</ion-label>
+	            	</ion-item>
+	            </ion-list>
+			</ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div>
+        <button ion-button full color="purplecolor" type="button" (click)="dismiss()">Close</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

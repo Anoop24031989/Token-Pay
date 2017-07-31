@@ -1,0 +1,143 @@
+page-login {
+ .pageContent 
+    {
+         font-family: Verdana, Geneva, sans-serif !important;
+        color:#fff; 
+        background:url("../assets/img/64.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size:cover;
+    }
+    .toast-message {
+    white-space: pre;
+    }
+    .panel
+    {
+        margin-top:10%; 
+        margin-bottom: auto;
+        width: 100%;
+        min-width:275px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .loginCard
+    {
+        margin-top:10%;
+        color:#fff;
+        background-color:transparent;
+        border:0;
+        border-radius:7px;
+        position:relative;
+        margin-bottom:24px;
+        box-shadow:none;
+    }
+    .loginItem{
+        border-radius:0px;
+        background-color:rgba(255,255,255,0.2);
+        box-shadow:1px 1px 4px rgba(0,0,0,0.15);
+        margin-bottom: 10px;
+        color:#fff;
+    }
+    *::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #fff !important;
+    }
+    *::-moz-placeholder { /* Firefox 19+ */
+        color: #fff !important;
+    }
+    *:-ms-input-placeholder { /* IE 10+ */
+        color: #fff !important;
+    }
+    *:-moz-placeholder { /* Firefox 18- */
+        color: #fff !important;
+    }
+    .item-inner {
+        border-bottom-color: #fff;
+        box-shadow: inset 0 -1px 0 0 #fff;
+    }
+    .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input {
+        margin-left: 14px;
+    }
+   .loginButton
+    {
+        width:100%;
+        min-width:255px;
+        padding-left: 5%;
+        padding-right: 5%; 
+        margin:0 auto;
+    }
+     .socialButton
+    {
+        margin: 10px 0px 0px 0px;
+        width:100%;
+        min-width:255px;
+        padding-left: 5%;
+        padding-right: 5%; 
+    }
+    h5 
+    {
+        width: 100%;
+        margin: .7em auto;
+        overflow: hidden;
+        text-align: center;
+        font-weight:300;
+        color: #fff;
+    }
+    h5:before, h5:after 
+    {
+        content: "";
+        display: inline-block;
+        width: 50%;
+        margin: 0 .5em 0 -55%;
+        vertical-align: middle;
+        border-bottom: 1px solid;
+    }
+    h5:after 
+    {
+        margin: 0 -55% 0 .5em;
+    }
+    .or-spacer 
+    {
+        width:100%; 
+        position:relative; 
+        .mask { 
+                overflow:hidden; 
+                height:20px; 
+                &:after 
+                { 
+                    content:''; 
+                    display:block; 
+                    margin:-25px auto 0;
+                    width:100%; 
+                    height:25px;  
+                    border-radius:125px / 12px;  
+                    box-shadow:0 0 8px black;
+                }
+            }
+        span 
+        {
+            $size:40px;
+            width:$size; height:$size; 
+            position:absolute; 
+            bottom:100%; margin-bottom:-$size/2;
+            left:50%; margin-left:-$size/2;
+            border-radius:100%;
+            box-shadow:0 2px 4px #999;
+            background:white;
+        }
+        span i 
+        {
+            $offset:4px;
+            position:absolute;
+            top:$offset; bottom:$offset;
+            left:$offset; right:$offset;
+            border-radius:100%;
+            border:1px dashed #aaa;
+            
+            text-align:center;
+            line-height:30px;
+            font-style:normal;
+            color:#999;
+        }
+    }
+}

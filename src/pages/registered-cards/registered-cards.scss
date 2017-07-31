@@ -1,0 +1,85 @@
+page-registered-cards {
+.pageContent 
+    {
+         font-family: Verdana, Geneva, sans-serif !important;
+        color:#fff; 
+        //background-color: #ddd;
+        background:url("../assets/img/64.jpg") no-repeat center center fixed;
+        //background:url("../assets/img/11.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size:cover;
+    }
+    .panel
+    { 
+        margin-bottom: auto;
+        width: 100%;
+        min-width:275px;
+        // max-width:500px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .registerCard
+    {
+        color:#fff;
+        //background-color:rgba(255,255,255,0.4);
+       // background-color:transparent;
+        border:0;
+        position:relative;
+        margin-bottom:24px;
+        //box-shadow:1px 1px 4px rgba(0,0,0,0.15);
+        box-shadow:none;
+    }
+    .registerItem{
+        border-radius:0px;
+        background-color:rgba(255,255,255,0.2); 
+        box-shadow:1px 1px 4px rgba(0,0,0,0.15);
+        margin-bottom: 1px;
+        //background-color: #fff;
+         color:#000;
+    }
+    .card-md ion-card-content {
+        padding: 2px 1px 2px 1px;
+        font-size: 1.4rem;
+        line-height: 1.5;
+    }
+    .input-has-focus .label-md[floating] {
+        color: #000 !important;
+    }
+    *::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #000 !important;
+    }
+    *::-moz-placeholder { /* Firefox 19+ */
+        color: #000 !important;
+    }
+    *:-ms-input-placeholder { /* IE 10+ */
+        color: #000 !important;
+    }
+    *:-moz-placeholder { /* Firefox 18- */
+        color: #000 !important;
+    }
+    // .item-inner {
+    //     border-bottom-color: #fff;
+    //     box-shadow: inset 0 -1px 0 0 #fff;
+    // }
+    .item-md ion-icon[item-left] + .item-inner, .item-md ion-icon[item-left] + .item-input {
+        margin-left: 14px;
+    }
+   .loginButton
+    {
+        width:100%;
+        min-width:255px;
+        padding-left: 5%;
+        padding-right: 5%; 
+        margin:0 auto;
+    }
+    .item-icon-left .item-content {
+  padding-left:3em;  
+}
+
+.item-icon-left i {
+  left:0;
+  right: auto;
+}
+}

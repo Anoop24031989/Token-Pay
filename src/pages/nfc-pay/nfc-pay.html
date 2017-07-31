@@ -1,0 +1,160 @@
+<!--
+  Generated template for the NfcPay page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="purplecolor">
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons end>
+	    <button  ion-button icon-only (click)="refresh()">
+	    	<ion-icon name="refresh-circle"></ion-icon>
+	    </button>
+    </ion-buttons>
+  </ion-navbar>
+ <ion-toolbar *ngIf="showPayment">
+        <ion-segment [(ngModel)]="cardSelection">
+            <ion-segment-button value="selectCard">
+                Select Card
+            </ion-segment-button>
+            <ion-segment-button value="addNewCard">
+                New Card 
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="pageContent" color="primary" contentBottom>
+<div class="panel" *ngIf="showPayment">
+        <div [ngSwitch]="cardSelection">
+         <ion-list *ngSwitchCase="'selectCard'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                       <ion-list>
+		                    <ion-item class="registerItem">
+		                        <ion-label color="dark" stacked>List of registered cards</ion-label>
+		                    </ion-item>
+		                     <form [formGroup]="registeredCardForm" novalidate>
+			                        <ion-item class="registerItem">
+			                            <ion-searchbar [(ngModel)]="queryText" formControlName="queryText" placeholder="Search"></ion-searchbar>
+			                            <ion-list radio-group [(ngModel)]="cardSelected" formControlName="cardSelected">
+			                                <ion-item *ngFor="let item of (items | cardsearch:queryText)">
+			                                <ion-label>XXXXXXXXXXXXXXX{{item }}</ion-label>
+	                						<ion-radio  value="{{item}}"></ion-radio>
+			                        		</ion-item>
+		                        		</ion-list>
+		                        	</ion-item>
+					                <button ion-button full evernote block [disabled]="disablePayment" (click)="confirmNFCPay()">
+								         <ion-icon name="share-alt"></ion-icon>
+								         Confirm ₹  {{totalAmt}}
+								     </button>
+							   </form>  
+		                </ion-list>
+                    </ion-card-content>
+                </ion-card>
+         </ion-list>
+         <ion-list *ngSwitchCase="'addNewCard'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="dark" stacked>Register your card details here</ion-label>
+                            </ion-item>
+                            <form [formGroup]="cardRegisterForm" novalidate>
+                            	<!-- <ion-col width-20 style="text-align:left;">
+                                    <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="submit" (click)="scanCard()">Scan Card
+                                    </button>
+                                </ion-col> -->
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>Credit Card Number</ion-label>
+                                    <ion-input type="number" ng-maxlength="19" name="creditCardNumber" formControlName="creditCardNumber" clearInput required [(ngModel)]="cardDetails.creditCardNumber"></ion-input>
+                                    <ion-icon color="primary" name="qr-scanner" style="font-size:2em;"  type="submit" (click)="scanCard()" item-right></ion-icon>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label color="dark">Valid Upto(Month/Year)</ion-label>
+                                    <ion-select name="creditExMonth" formControlName="creditExMonth" [(ngModel)]="cardDetails.creditExMonth">
+                                        <ion-option value="01">01</ion-option>
+                                        <ion-option value="02">02</ion-option>
+                                        <ion-option value="03">03</ion-option>
+                                        <ion-option value="04">04</ion-option>
+                                        <ion-option value="05">05</ion-option>
+                                        <ion-option value="06">06</ion-option>
+                                        <ion-option value="07">07</ion-option>
+                                        <ion-option value="08">08</ion-option>
+                                        <ion-option value="09">09</ion-option>
+                                        <ion-option value="10">10</ion-option>
+                                        <ion-option value="11">11</ion-option>
+                                        <ion-option value="12" checked="true">12</ion-option>
+                                    </ion-select>
+                                    <ion-select name="creditExYear" formControlName="creditExYear" [(ngModel)]="creditExYear">
+                                        <!--<ion-option *ngFor="let item of securityQuestions" value="{{item.exYear}}">{{item.descr}}</ion-option>-->
+                                        <ion-option value="17">2017</ion-option>
+                                        <ion-option value="18">2018</ion-option>
+                                        <ion-option value="19">2019</ion-option>
+                                        <ion-option value="20">2020</ion-option>
+                                        <ion-option value="21">2021</ion-option>
+                                        <ion-option value="22">2022</ion-option>
+                                        <ion-option value="23">2023</ion-option>
+                                        <ion-option value="24">2024</ion-option>
+                                        <ion-option value="25">2025</ion-option>
+                                        <ion-option value="26" checked="true">2026</ion-option>
+                                        <ion-option value="27">2027</ion-option>
+
+                                    </ion-select>
+                                </ion-item>
+                                <!--<ion-item class="registerItem" hidden>
+                                    <ion-label color="dark" floating>CVV</ion-label>
+                                    <ion-input type="password" maxlength="6" minlength="4" formControlName="cvv" clearInput [(ngModel)]="cardDetails.cvv"></ion-input>
+                                </ion-item>-->
+                                <br/>
+                                <ion-row>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitCreditCardRegistration()">Submit
+                                        </button>
+                                    </ion-col>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">Reset
+                                        </button>
+                                    </ion-col>
+                                </ion-row>
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-list>
+        </div>
+</div>
+<div class="panel" *ngIf="!showPayment">
+
+	<ion-card class="registerCard">
+	 <ion-card-content text-center style="padding-bottom:0px;">
+	 <div *ngIf="paymentResult;else failed"></div>
+	 <ng-template #success>
+			 <ion-icon name="checkmark-circle" class="ion-result" [ngStyle]="{'color': 'rgb(27, 216, 199)'}"></ion-icon>
+			 <ion-label color="purplecolor">₹ {{totalAmt}}</ion-label>
+			 <ion-label color="purplecolor">
+			 		<h1>Payment Complete</h1><br>
+			 		You will rececive a notification shortly
+			 		<br>
+			 		Order No : {{billDetails[0].billNo}}
+			 </ion-label>
+		 </ng-template>
+		  <ng-template #failed>
+			 <ion-icon name="close-circle" class="ion-result" [ngStyle]="{'color': 'rgb(241, 5, 70)'}"></ion-icon>
+			 <ion-label color="purplecolor">
+			 		<h1>Payment Failed</h1><br>
+			 		Try Again!
+			 </ion-label>
+		</ng-template>
+	 
+	 	<button ion-button  (click)="backtoShop()">
+	         <ion-icon name="arrow-back"></ion-icon>
+	        Back
+	     </button>
+	 </ion-card-content>
+	 </ion-card>
+
+</div>
+</ion-content>

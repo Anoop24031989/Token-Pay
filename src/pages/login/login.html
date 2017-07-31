@@ -1,0 +1,45 @@
+
+<ion-content class="pageContent" contentBottom>
+    <div class="panel">
+        <div style="text-align:center;margin-bottom:5%">
+            <img src="assets/img/54.png" style="height:75px;width:75px;"/>
+            <h1 style="font-size:2em;" color="light">{{'TOKENPAY' | translate}}</h1>
+        </div>
+        <ion-card class="loginCard">
+            <ion-card-content style="padding-bottom:0px;">
+                <ion-list>
+                    <form [formGroup]="loginForm" novalidate>
+                        <ion-item class="loginItem">
+                            <ion-input color="primary" type="text" formControlName="username" clearInput [(ngModel)]="modalUsername" #username placeholder="{{'USERNAME' | translate}}"></ion-input>
+                            <ion-icon name="person" item-right></ion-icon>
+                        </ion-item>
+                        <ion-item class="loginItem">
+                            <ion-input type="password" #password formControlName="password" clearInput [(ngModel)]="modalPassword" placeholder="{{'PSWD' | translate}}"></ion-input>
+                            <ion-icon name="lock" item-right></ion-icon>
+                        </ion-item>
+                        <ion-row>
+                            <ion-col width-50 style="text-align:left;">
+                                <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitLogin(username, password)">{{'LOGIN' | translate }}
+                                    <ion-icon name="log-in"></ion-icon>
+                                </button>
+                            </ion-col>
+                            <ion-col width-50 style="text-align:left;">
+                                <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="light" type="button" [navPush]="registerPage">{{'REGISTER' | translate }}
+                                    <ion-icon name="person-add"></ion-icon>
+                                </button>
+                            </ion-col>
+                        </ion-row>
+                             <!--[disabled]="!loginForm.valid"  -->
+                        <ion-row>
+                            <ion-col width-100 style="text-align:center;">
+                                <button ion-button large clear color="light" icon-right style="font-size:1em;padding: 0px;text-transform: none;text-decoration:underline;" (click)="forgotPassword()">
+                                    {{'FORGOT PSWD' | translate}}
+                                </button>    
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

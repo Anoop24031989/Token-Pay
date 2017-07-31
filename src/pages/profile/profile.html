@@ -1,0 +1,208 @@
+<ion-header>
+    <ion-navbar color="purplecolor">
+    	<button ion-button menuToggle icon-only>
+            <ion-icon name='menu'></ion-icon>
+        </button>
+        <ion-title>{{title}}</ion-title>
+        <!--<ion-buttons end>
+            <button ion-button icon-only (click)="SpeechRecognise()">
+                <ion-icon name="mic"></ion-icon>
+            </button>
+        </ion-buttons>-->
+
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="cardSelection">
+            <ion-segment-button value="updateProfile">
+                {{'UPDT PROFILE' | translate }}
+            </ion-segment-button>
+            <ion-segment-button value="generalSettings">
+                {{'SETTINGS' | translate }}
+            </ion-segment-button>
+            <ion-segment-button value="changePassword">
+                {{'CHNG PSWD' | translate }}
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="pageContent">
+    <div class="panel">
+        <div [ngSwitch]="cardSelection">
+            <ion-list *ngSwitchCase="'updateProfile'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="purplecolor" stacked>{{'UPDT PROFL TITLE' | translate }}</ion-label>
+                            </ion-item>
+                            <form [formGroup]="updateProfileForm" novalidate>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'FIRST NAME' | translate }}</ion-label>
+                                    <ion-input color="primary" type="text" formControlName="firstName" clearInput [(ngModel)]="userDetails.firstName"></ion-input>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'LAST NAME' | translate }}</ion-label>
+                                    <ion-input color="primary" type="text" formControlName="lastName" clearInput [(ngModel)]="userDetails.lastName"></ion-input>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'MOBILE' | translate }}</ion-label>
+                                    <ion-input color="primary" type="text" formControlName="mobileNumber" clearInput [(ngModel)]="userDetails.mobileNumber"></ion-input>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'GENDER' | translate }}</ion-label>
+                                    <ion-select color="primary" formControlName="gender" clearInput [(ngModel)]="userDetails.gender">
+                                        <ion-option value="male" selected="true">{{'MALE' | translate }}</ion-option>
+                                        <ion-option value="female">{{'FEMALE' | translate }}</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'COUNTRY' | translate }}</ion-label>
+                                    <ion-select color="primary" formControlName="country" clearInput [(ngModel)]="userDetails.country">
+                                        <ion-option value="ind" selected="true">India</ion-option>
+                                        <ion-option value="us">America</ion-option>
+                                        <ion-option value="uk">London</ion-option>
+                                        <ion-option value="mal">Malasia</ion-option>
+                                    </ion-select>
+                                </ion-item>
+
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'SEC QUES' | translate }}</ion-label>
+                                    <ion-select formControlName="secQuestion" clearInput [(ngModel)]="userDetails.secQuestion">
+                                        <ion-option *ngFor="let item of securityQuestions" value="{{item.masterID}}">{{item.descr}}</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'ANS' | translate }}</ion-label>
+                                    <ion-input color="primary" type="text" formControlName="secAnswer" clearInput [(ngModel)]="userDetails.secAnswer"></ion-input>
+                                </ion-item>
+                                <br/>
+                                <ion-row>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitUpdateProfile()">{{'SUBMIT' | translate }}
+                                        </button>
+                                    </ion-col>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">{{'RESET' | translate }}
+                                        </button>
+                                    </ion-col>
+                                </ion-row>
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-list>
+            <ion-list *ngSwitchCase="'generalSettings'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="purplecolor" stacked>{{'SEC FACTOR AUTH' | translate }}</ion-label>
+                            </ion-item>
+                            <ion-item class="registerItem">
+                                <ion-label>{{'FINGER AUTH' | translate }}</ion-label>
+                                <ion-toggle [(ngModel)]="fingerPrint" (ionChange)="openFingerPrint()" color="energized"></ion-toggle>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>{{'OTP' | translate }}</ion-label>
+                                <ion-toggle color="energized"></ion-toggle>
+                            </ion-item>
+                            <!--<ion-item>
+                                <ion-label>{{'SPEECH_RECOGNISATION' | translate }}</ion-label>
+                                <ion-toggle value="speech" ng-true-value="YES" ng-false-value="NO" [(ngModel)]="speechRecognisation" (ionChange)="speechRecognisation()" color="energized"></ion-toggle>
+                            </ion-item>-->
+                            <form [formGroup]="settingsForm" novalidate>
+                                <br/>
+                                <!--<ion-row>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitCardRegistration()">Submit
+                                        </button>
+                                    </ion-col>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">Reset
+                                        </button>
+                                    </ion-col>
+                                </ion-row>-->
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="purplecolor" stacked>{{'LANGUAGE' | translate }}</ion-label>
+                            </ion-item>
+                            <form [formGroup]="languageRegisterForm" novalidate>
+                                <ion-list radio-group>
+                                    <ion-item>
+                                        <ion-label>English</ion-label>
+                                        <ion-radio (click)="translateToEnglish()" [checked]="english"></ion-radio>
+                                    </ion-item>
+
+                                    <ion-item>
+                                        <ion-label>Malay</ion-label>
+                                        <ion-radio (click)="translateToMalay()" [checked]="Malay"></ion-radio>
+                                    </ion-item>
+
+                                    <ion-item>
+                                        <ion-label>Spanish</ion-label>
+                                        <ion-radio (click)="translateToSpanish()" [checked]="spanish"></ion-radio>
+                                    </ion-item>
+                                </ion-list>
+                                <br/>
+                                <!--<ion-row>
+                            <ion-col width-50 style="text-align:left;">
+                                <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitCardRegistration()">Submit
+                                </button>
+                            </ion-col>
+                            <ion-col width-50 style="text-align:left;">
+                                <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">Reset
+                                </button>
+                            </ion-col>
+                        </ion-row>-->
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+
+            </ion-list>
+            <ion-list *ngSwitchCase="'changePassword'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="purplecolor" stacked>{{'CHANGE PSWD' | translate }}</ion-label>
+                            </ion-item>
+                            <form [formGroup]="changePwdForm" novalidate>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'OLD PSWD' | translate }}</ion-label>
+                                    <ion-input color="primary" type="password" formControlName="oldPassword" minlength="4" maxlength="10" clearInput [(ngModel)]="userDetails.oldPassword"></ion-input>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'NEW PSWD' | translate }}</ion-label>
+                                    <ion-input color="primary" type="password" formControlName="newPassword" minlength="4" maxlength="10" clearInput [(ngModel)]="userDetails.newPassword"></ion-input>
+                                </ion-item>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'CNFRM PSWD' | translate }}</ion-label>
+                                    <ion-input color="primary" type="password" formControlName="changeConfirmPassword" minlength="4" maxlength="10" clearInput
+                                    [(ngModel)]="userDetails.changeConfirmPassword"></ion-input>
+                                </ion-item>
+                                <br/>
+                                <ion-row>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="ChangePassword()">{{'SUBMIT' | translate }}
+                                        </button>
+                                    </ion-col>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">{{'RESET' | translate }}
+                                        </button>
+                                    </ion-col>
+                                </ion-row>
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>

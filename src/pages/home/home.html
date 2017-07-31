@@ -1,0 +1,84 @@
+<ion-header class="pageContent">
+    <ion-navbar color="purplecolor">
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='menu'></ion-icon>
+        </button>
+        <ion-title>{{'HOME' | translate}}</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="SpeechRecognise()">
+                <ion-icon name="mic"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="logout()">
+                <ion-icon name="power"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+     <ion-toolbar no-border-top  color="light">
+		  <ion-row class="item-profile">
+		     <div>
+			   <a (click)="onUpdateProfilePic()"><img [src]="userImage" class="userImageBanner"></a>
+			   </div>
+			  <ion-title class="overflow" >
+			  <div class="profile-title">
+			  	{{'WELCOME' | translate }} : {{DisplayFirstName}} {{DisplayLastName}}
+			  </div><br>
+			  <div class="profile-sub-title">
+			  {{'LAST VISITED' | translate}}: {{lastAccessDatePrint}}
+			  </div>
+			 </ion-title>
+		  </ion-row>
+  	</ion-toolbar >	
+</ion-header>
+<ion-content class="pageContent" color="primary" contentBottom>
+ <!--    <ion-card>
+        <ion-list>
+            <button ion-item style="color:#676666;height: 10rem;">
+                <ion-icon color="primary" style="font-size:2em;" name="person" item-left></ion-icon>
+                <ion-card-header>
+                    {{'LASTLOGIN' | translate}}
+                </ion-card-header>
+                <ion-card-content>
+                    {{lastAccessDatePrint}}
+                </ion-card-content>
+                <ion-icon name="arrow-dropright" style="font-size:2em;" item-right></ion-icon>
+            </button>
+        </ion-list>
+    </ion-card> -->
+    <ion-card>
+        <ion-list>
+            <button ion-item style="color:#676666;height: 7rem;">
+                <ion-icon color="primary" style="font-size:2em;" name="clipboard" item-left></ion-icon>
+                {{'LAST_TEN_TRANSACTION' | translate}}
+                <!--<ion-icon name="arrow-dropright" style="font-size:2em;" item-right></ion-icon>-->
+            </button>
+        </ion-list>
+    </ion-card>
+    <ion-fab bottom right>
+        <button ion-fab color="purplecolor">
+            <ion-icon name="options"></ion-icon>
+        </button>
+        <ion-fab-list side="top">
+            <button color="purplecolor" ion-fab (click)="changePassword()">
+                <ion-icon name="key" item-right></ion-icon>
+            </button>
+            <button color="purplecolor" ion-fab (click)="settings()">
+                <ion-icon name="settings" item-right></ion-icon>
+            </button>
+            <button color="purplecolor" ion-fab (click)="logout()">
+                <ion-icon name="power" item-right></ion-icon>
+            </button>
+        </ion-fab-list>
+    </ion-fab>
+</ion-content>
+<style>
+    .userImageBanner {
+        width: 67px !important;
+        max-width: 67px !important;
+        height: 67px !important;
+        max-height: 67px !important;
+        border-radius: 50px !important;
+        position: absolute;
+        top: 3%;
+        left: 1%;
+    }
+</style>

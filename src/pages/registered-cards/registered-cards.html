@@ -1,0 +1,50 @@
+<ion-header>
+
+    <ion-navbar color="purplecolor">
+        <ion-title>Registered Card Details</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="SpeechRecognise()">
+                <ion-icon name="mic"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content class="pageContent">
+    <div class="panel">
+        <ion-card class="registerCard">
+            <ion-card-content style="padding-bottom:0px;">
+                <ion-list>
+                    <ion-item class="registerItem">
+                        <ion-label color="dark" stacked>List of registered cards</ion-label>
+                    </ion-item>
+                        <ion-item class="registerItem">
+                            <ion-searchbar [(ngModel)]="queryText" placeholder="Search"></ion-searchbar>
+                            <!--<ion-list>-->
+                            <!--<ion-item *ngFor="let list of (items | cardsearch:queryText)">-->
+                            <!--<ion-item *ngFor="let item of items">
+                                    {{ item }}
+                                </ion-item>
+                            </ion-list>-->
+                            <ion-list>
+                                <ion-item-sliding *ngFor="let item of (items | cardsearch:queryText)">
+                                    <ion-item>
+                                        <ion-icon color="primary" style="font-size:0.5em;" name="arrow-back" item-right>Slide Here</ion-icon>
+                                        xxxxxxxxxxxx{{item}}
+                                    </ion-item>
+                                    <ion-item-options side="right">
+                                        <button ion-button color="danger" (click)="DeActivate()">DeActivate</button>
+                                        <button ion-button (click)="AddCard()">Add Card</button>
+                                        <button ion-button color="light" (click)="ViewCard(item)">View</button>
+                                    </ion-item-options>
+                                </ion-item-sliding>
+                            </ion-list>
+                        </ion-item>
+                        <br/>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

@@ -1,0 +1,52 @@
+<!--
+  Generated template for the ShoppingItems page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="purplecolor">
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='menu'></ion-icon>
+        </button>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons end>
+	        <button ion-button icon-only (click)="openCart()">
+	            <ion-icon  name="ios-cart-outline" style="position:relative; font-size:3em;">
+	                <span style="position:absolute; top:4px; left:18px;color:red; font-size:20px !important">{{totalCartItem}}</span>
+	            </ion-icon>
+	        </button>
+	    </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="pageContent">
+ <div class="panel">
+        <ion-card class="registerCard">
+		     <ion-list>
+		             <ion-item *ngFor="let item of items" style="text-align: center !important">
+		                    <img [src]="item.image">
+		                    
+		                    	<h2> {{item.name}}</h2>
+		                    <br>
+		                    	Price:₹  {{item.Price}}
+		                    	
+						            <button ion-button (click)="addToCart(item)">
+						                Add Cart <ion-icon name="cart"></ion-icon>
+						            </button>
+		             </ion-item>
+		     </ion-list>
+	     </ion-card>
+</div>
+</ion-content>
+<ion-footer>
+      <ion-toolbar color="purplecolor" evernote  clear style="text-align:center;">
+        <ion-title>
+                <button color="darkPrimary" ion-button full evernote block (click)="openCart()">
+                    <ion-icon name="share-alt"></ion-icon>
+                    Proceed
+                </button>    
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

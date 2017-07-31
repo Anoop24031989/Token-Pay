@@ -1,0 +1,164 @@
+<ion-header class="pageContent">
+    <ion-navbar color="purplecolor">
+        <ion-title>{{'CARD_REGISTRATION' | translate}}</ion-title>
+        <!--<ion-buttons end>
+            <button ion-button icon-only (click)="SpeechRecognise()">
+                <ion-icon name="mic"></ion-icon>
+            </button>
+        </ion-buttons>-->
+    </ion-navbar>
+    <ion-toolbar color="fadewhite">
+        <ion-segment [(ngModel)]="cardSelection">
+            <ion-segment-button class="ion-segmant-class" value="creditCard">
+                {{'CREDIT_CARD' | translate}}
+            </ion-segment-button>
+            <ion-segment-button class="ion-segmant-class" value="debitCard">
+                {{'DEBIT_CARD' | translate}}
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="pageContent">
+    <div class="panel">
+        <div [ngSwitch]="cardSelection">
+            <ion-list *ngSwitchCase="'creditCard'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="dark" stacked>{{'REGISTER_CREDIT_CARD_DETAILS_HERE' | translate}}</ion-label>
+                            </ion-item>
+                            <form [formGroup]="creditRegisterForm" novalidate>
+                                <!-- <ion-col width-20 style="text-align:left;">
+                                    <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="submit" (click)="scanCard()">Scan Card
+                                    </button>
+                                </ion-col> -->
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating> {{'CREDIT_CARD_NUMBER' | translate}}</ion-label>
+                                    <ion-input type="number" ng-maxlength="19" name="creditCardNumber" formControlName="creditCardNumber" clearInput required
+                                    [(ngModel)]="cardDetails.creditCardNumber"></ion-input>
+                                    <ion-icon color="primary" name="barcode" style="font-size:2em;" type="submit" (click)="scanCard()" item-right></ion-icon>
+                                    <!--<img src="assets/img/card_scanner.png" width="15" height="15">                               -->
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label color="dark"> {{'VALID_UP_TO' | translate}}</ion-label>
+                                    <ion-select name="creditExMonth" formControlName="creditExMonth" [(ngModel)]="cardDetails.creditExMonth">
+                                        <ion-option value="01" selected="true">01</ion-option>
+                                        <ion-option value="02">02</ion-option>
+                                        <ion-option value="03">03</ion-option>
+                                        <ion-option value="04">04</ion-option>
+                                        <ion-option value="05">05</ion-option>
+                                        <ion-option value="06">06</ion-option>
+                                        <ion-option value="07">07</ion-option>
+                                        <ion-option value="08">08</ion-option>
+                                        <ion-option value="09">09</ion-option>
+                                        <ion-option value="10">10</ion-option>
+                                        <ion-option value="11">11</ion-option>
+                                        <ion-option value="12">12</ion-option>
+                                    </ion-select>
+                                    <ion-select name="creditExYear" formControlName="creditExYear" [(ngModel)]="creditExYear">
+                                        <!--<ion-option *ngFor="let item of securityQuestions" value="{{item.exYear}}">{{item.descr}}</ion-option>-->
+                                        <ion-option value="17" selected="true">2017</ion-option>
+                                        <ion-option value="18">2018</ion-option>
+                                        <ion-option value="19">2019</ion-option>
+                                        <ion-option value="20">2020</ion-option>
+                                        <ion-option value="21">2021</ion-option>
+                                        <ion-option value="22">2022</ion-option>
+                                        <ion-option value="23">2023</ion-option>
+                                        <ion-option value="24">2024</ion-option>
+                                        <ion-option value="25">2025</ion-option>
+                                        <ion-option value="26" checked="true">2026</ion-option>
+                                        <ion-option value="27">2027</ion-option>
+
+                                    </ion-select>
+                                </ion-item>
+                                <!--<ion-item class="registerItem" hidden>
+                                    <ion-label color="dark" floating>CVV</ion-label>
+                                    <ion-input type="password" maxlength="6" minlength="4" formControlName="cvv" clearInput [(ngModel)]="cardDetails.cvv"></ion-input>
+                                </ion-item>-->
+                                <br/>
+                                <ion-row>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitCreditCardRegistration()">{{'SUBMIT' | translate }}
+                                        </button>
+                                    </ion-col>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">{{'RESET' | translate }}
+                                        </button>
+                                    </ion-col>
+                                </ion-row>
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-list>
+            <ion-list *ngSwitchCase="'debitCard'">
+                <ion-card class="registerCard">
+                    <ion-card-content style="padding-bottom:0px;">
+                        <ion-list>
+                            <ion-item class="registerItem">
+                                <ion-label color="dark" stacked>{{'REGISTER_DEBIT_CARD_DETAILS_HERE' | translate}}</ion-label>
+                            </ion-item>
+                            <form [formGroup]="debitRegisterForm" novalidate>
+                                <ion-item class="registerItem">
+                                    <ion-label color="dark" floating>{{'DEBIT_CARD_NUMBER' | translate}}</ion-label>
+                                    <ion-input type="number" ng-maxlength="19" name="debitCardNumber" formControlName="debitCardNumber" clearInput required [(ngModel)]="cardDetails.debitCardNumber"></ion-input>
+                                    <ion-icon color="primary" name="barcode" style="font-size:2em;" type="submit" (click)="scanCard()" item-right></ion-icon>
+
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label color="dark">{{'VALID_UP_TO' | translate}}</ion-label>
+                                    <ion-select name="debitExMonth" formControlName="debitExMonth" [(ngModel)]="cardDetails.debitExMonth">
+                                        <ion-option value="01" selected="true">01</ion-option>
+                                        <ion-option value="02">02</ion-option>
+                                        <ion-option value="03">03</ion-option>
+                                        <ion-option value="04">04</ion-option>
+                                        <ion-option value="05">05</ion-option>
+                                        <ion-option value="06">06</ion-option>
+                                        <ion-option value="07">07</ion-option>
+                                        <ion-option value="08">08</ion-option>
+                                        <ion-option value="09">09</ion-option>
+                                        <ion-option value="10">10</ion-option>
+                                        <ion-option value="11">11</ion-option>
+                                        <ion-option value="12" checked="true">12</ion-option>
+                                    </ion-select>
+                                    <ion-select name="debitExYear" formControlName="debitExYear" [(ngModel)]="debitExYear">
+                                        <!--<ion-option *ngFor="let item of securityQuestions" value="{{item.exYear}}">{{item.descr}}</ion-option>-->
+
+
+                                        <ion-option value="17" selected="true">2017</ion-option>
+                                        <ion-option value="18">2018</ion-option>
+                                        <ion-option value="19">2019</ion-option>
+                                        <ion-option value="20">2020</ion-option>
+                                        <ion-option value="21">2021</ion-option>
+                                        <ion-option value="22">2022</ion-option>
+                                        <ion-option value="23">2023</ion-option>
+                                        <ion-option value="24">2024</ion-option>
+                                        <ion-option value="25">2025</ion-option>
+                                        <ion-option value="26" checked="true">2026</ion-option>
+                                        <ion-option value="27">2027</ion-option>
+                                    </ion-select>
+                                </ion-item>
+                                <!--<ion-item class="registerItem" hidden>
+                                    <ion-label color="dark" floating>ATM Pin</ion-label>
+                                    <ion-input type="password" maxlength="6" minlength="4" formControlName="atmPin" clearInput [(ngModel)]="cardDetails.atmPin"></ion-input>
+                                </ion-item>-->
+                                <br/>
+                                <ion-row>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="darkPrimary" type="submit" (click)="submitDebitCardRegistration()">{{'SUBMIT' | translate }}
+                                        </button>
+                                    </ion-col>
+                                    <ion-col width-50 style="text-align:left;">
+                                        <button ion-button full icon-right style="box-shadow:2px 2px 6px rgba(0,0,0,0.4);" color="dark" type="reset">{{'RESET' | translate }}
+                                        </button>
+                                    </ion-col>
+                                </ion-row>
+                            </form>
+                        </ion-list>
+                    </ion-card-content>
+                </ion-card>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>

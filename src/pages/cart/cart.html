@@ -1,0 +1,50 @@
+<!--
+  Generated template for the Cart page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+ <ion-navbar color="purplecolor">
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='menu'></ion-icon>
+        </button>
+        <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="pageContent" color="primary" contentBottom>
+  <div class="panel">
+        <ion-card class="registerCard">
+			<ion-list>
+			    <ion-item *ngFor="let item of cartItems">
+			      <ion-row>
+			        <ion-col width-50>
+			          <p> {{item.name}}</p>
+			        </ion-col>
+			        <ion-col width-30>
+			          <p>₹  {{item.Price}}</p>
+			        </ion-col>
+			        <ion-col width-20>
+				        <button ion-button clear (click)="removeItemFromCart(item)">
+			                <ion-icon name="trash"></ion-icon>
+			            </button>
+			        </ion-col>
+			      </ion-row>
+			    </ion-item>
+			  </ion-list>
+  </ion-card>
+  </div>
+</ion-content>
+<ion-footer>
+      <ion-toolbar color="purplecolor" evernote clear style="text-align:center;">
+        <ion-title>
+                <button color="darkPrimary" [disabled]="disablePayment" ion-button full evernote block (click)="pay()">
+                    <ion-icon name="share-alt"></ion-icon>
+                    Pay ₹  {{totalAmt}}
+                </button>    
+        </ion-title>
+    </ion-toolbar>
+</ion-footer>

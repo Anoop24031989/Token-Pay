@@ -1,0 +1,46 @@
+<ion-menu [content]="content">
+    <ion-toolbar style="padding:0px;">
+        <ion-card style="margin:0px;width:100%;">
+            <ion-list>
+                <img src="assets/img/64.jpg">
+                <img [src]="userImage" class="userImageBanner">
+                <div class="card-title">
+                    {{DisplayFirstName}} {{DisplayLastName}}
+                </div>
+            </ion-list>
+        </ion-card>
+    </ion-toolbar>
+
+    <ion-content>
+        <ion-list no-lines>
+            <ion-item-group>
+                <button ion-item menuClose *ngFor="let menu of sideMenus" (click)="openPage(menu)" [ngClass]="{'active': menu.index==activeSideMenu}">
+                    <ion-icon item-left [name]="menu.icon" [ngStyle]="{'color': menu.color}"></ion-icon>
+                    {{menu.title}}
+                </button>
+            </ion-item-group>
+        </ion-list>
+    </ion-content>
+    <ion-footer>
+        <ion-toolbar>
+            <div>
+                <button full type="button" class="buttonlogout" ion-item menuClose (click)="logout()">
+                    <ion-icon name="power"></ion-icon>
+                </button>
+            </div>
+        </ion-toolbar>
+    </ion-footer>
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<style>
+    .userImageBanner {
+        width: 67px !important;
+        max-width: 67px !important;
+        height: 67px !important;
+        max-height: 67px !important;
+        border-radius: 50px !important;
+        position: absolute;
+        top: 30%;
+        left: 32%;
+    }
+</style>
